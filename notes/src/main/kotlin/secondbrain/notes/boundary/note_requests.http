@@ -1,0 +1,11 @@
+### Get all Notes
+GET http://localhost:8080/notes
+
+### Create Note
+POST http://localhost:8080/notes
+Content-Type: application/json
+
+{
+  "title": "Testing Notes",
+  "content": "Creating new Notes works!"
+}
