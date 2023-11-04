@@ -19,4 +19,22 @@ class NoteService {
     fun getNoteById(id: Long): Note? {
         return Note.findById(id)
     }
+
+    @Transactional
+    fun deleteNoteById(id: Long) {
+        val note = Note.findById(id)
+        note?.delete()
+    }
+
+    @Transactional
+    fun updateNote(id: Long, note: Note): Note {
+        val entity = Note.findById(id)
+        entity?.title = note.title
+        entity?.content = note.content
+        return entity!!
+    }
+
+    fun getNotesByTitle(title: String): List<Note> {
+        return Note.findByTitle(title)
+    }
 }

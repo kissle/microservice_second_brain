@@ -12,3 +12,25 @@ Content-Type: application/json
 
 ### Get Note by ID
 GET http://localhost:8080/notes/1
+
+
+### Create Note
+POST http://localhost:8080/notes/1
+Content-Type: application/json
+
+{
+  "title": "Testing Notes",
+  "content": "Creating new Notes works!"
+}
+
+### Update Note
+PUT http://localhost:8080/notes/2
+Content-Type: application/json
+
+{
+  "title": "Updated Note",
+  "content": "Updateing Notes works!"
+}
+
+### Find Notes by Title
+GET http://localhost:8080/notes/byTitle/Updated%20Note

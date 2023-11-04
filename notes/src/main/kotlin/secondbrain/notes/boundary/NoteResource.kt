@@ -1,12 +1,9 @@
 package secondbrain.notes.boundary
 
 import jakarta.inject.Inject
-import jakarta.ws.rs.Consumes
-import jakarta.ws.rs.GET
-import jakarta.ws.rs.POST
-import jakarta.ws.rs.Path
-import jakarta.ws.rs.Produces
+import jakarta.ws.rs.*
 import jakarta.ws.rs.core.MediaType
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse
 import secondbrain.notes.control.NoteService
 import secondbrain.notes.entities.Note
 
@@ -32,8 +29,35 @@ class NoteResource {
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
+    @APIResponse(responseCode = "200", description = "Note found")
+    @APIResponse(responseCode = "204", description = "Note not found")
     fun getById(id: Long): Note? {
         return noteService.getNoteById(id)
     }
 
+    @DELETE
+    @Path("/{id}")
+    @APIResponse(responseCode = "204", description = "Note deleted")
+    fun deleteById(id: Long) {
+        return noteService.deleteNoteById(id)
+    }
+
+    @PUT
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @APIResponse(responseCode = "200", description = "Note updated")
+    @APIResponse(responseCode = "204", description = "Note not found")
+    fun updateNote(@PathParam("id") id: Long, note: Note): Note {
+        return noteService.updateNote(id, note)
+    }
+
+    @GET
+    @Path("/byTitle/{title}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @APIResponse(responseCode = "200", description = "Note found")
+    @APIResponse(responseCode = "204", description = "Note not found")
+    fun getByTitle(@PathParam("title") title: String): List<Note> {
+        return noteService.getNotesByTitle(title)
+    }
 }
