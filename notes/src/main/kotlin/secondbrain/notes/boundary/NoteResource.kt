@@ -28,4 +28,12 @@ class NoteResource {
     fun create(note: Note): Note {
         return noteService.createNote(note)
     }
+
+    @GET
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    fun getById(id: Long): Note? {
+        return noteService.getNoteById(id)
+    }
+
 }

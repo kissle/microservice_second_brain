@@ -15,4 +15,8 @@ class NoteService {
         note.persist()
         return note
     }
+
+    fun getNoteById(id: Long): Note? {
+        return Note.findById(id)
+    }
 }

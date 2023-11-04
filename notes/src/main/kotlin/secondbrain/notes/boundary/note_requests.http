@@ -9,3 +9,6 @@ Content-Type: application/json
   "title": "Testing Notes",
   "content": "Creating new Notes works!"
 }
+
+### Get Note by ID
+GET http://localhost:8080/notes/1
