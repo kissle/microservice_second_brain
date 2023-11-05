@@ -42,3 +42,26 @@ services:
       POSTGRES_DB: postgres
     ports:
         - "5432:5432"
+
+  users-db:
+    image: postgres
+    container_name: users-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5433:5432"
+
+  keycloack:
+    image: jboss/keycloak
+    container_name: keycloack
+    environment:
+      DB_VENDOR: POSTGRES
+      DB_ADDR: users-db
+      DB_DATABASE: postgres
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+    ports:
+      - "7070:8080"
+    restart: always
