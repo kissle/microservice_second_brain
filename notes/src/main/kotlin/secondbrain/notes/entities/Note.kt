@@ -7,9 +7,9 @@ import jakarta.persistence.Entity
 @Entity
 open class Note() : PanacheEntity() {
     companion object: PanacheCompanion<Note> {
-        fun findByTitle(title: String) = list("title ILIKE ?1", title)
+        open fun findByTitle(title: String) = list("title ILIKE ?1", title)
     }
 
-    lateinit var title: String
-    var content: String? = null
+    open lateinit var title: String
+    open var content: String? = null
 }
