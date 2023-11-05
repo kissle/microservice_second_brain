@@ -12,9 +12,4 @@ open class Note() : PanacheEntity() {
 
     lateinit var title: String
     var content: String? = null
-
-    constructor(title: String, content: String) : this() {
-        this.title = title
-        this.content = content
-    }
 }
