@@ -21,7 +21,7 @@ services:
 
   jaeger:
     image: jaegertracing/all-in-one
-    container_name: jaeger2
+    container_name: jaeger-second-brain
     ports:
       - "16686:16686"
       - "6831:6831/udp"
@@ -52,16 +52,3 @@ services:
       POSTGRES_DB: postgres
     ports:
       - "5433:5432"
-
-  keycloack:
-    image: jboss/keycloak
-    container_name: keycloack
-    environment:
-      DB_VENDOR: POSTGRES
-      DB_ADDR: users-db
-      DB_DATABASE: postgres
-      DB_USER: postgres
-      DB_PASSWORD: postgres
-    ports:
-      - "7070:8080"
-    restart: always

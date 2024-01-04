@@ -4,6 +4,7 @@ import jakarta.inject.Inject
 import jakarta.ws.rs.*
 import jakarta.ws.rs.core.MediaType
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse
+import org.jboss.logging.Logger
 import secondbrain.notes.control.NoteService
 import secondbrain.notes.entities.Note
 
@@ -13,10 +14,20 @@ class NoteResource {
     @Inject
     lateinit var noteService: NoteService
 
+    @Inject
+    lateinit var LOG: Logger
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    fun getAllNotes(): List<Note> {
-        return noteService.getAllNotes()
+    fun getAllNotes(): NotesListDto {
+        var notesList = NotesListDto()
+        notesList.data = noteService.getAllNotes()
+        notesList.page = 1
+        notesList.pageSize = notesList.data.size
+        notesList.pages = 1
+
+        LOG.info("Notes list: $notesList")
+        return notesList
     }
 
     @POST
